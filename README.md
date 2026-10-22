@@ -31,39 +31,36 @@ The repository also contains code for:
 
 These components should not all be considered production-verified until their live workflows have been tested. See [Current status](#current-status).
 
-## Architecture
-
 
 ## Architecture
 
 ```mermaid
 flowchart TD
-    S[Strava webhook] --> API[api/index.py]
-    T[Telegram webhook] --> API
-    API --> Q[QStash queue]
-    Q --> W[api/worker]
+    S["Strava webhook"] --> API["api/index.py"]
+    T["Telegram webhook"] --> API
+    API --> Q["QStash queue"]
+    Q --> W["api/worker"]
 
-    W --> O[Orchestrator (LLM)]
-    W --> D[Data Agent (Python)]
-    W --> M[Memory Manager]
+    W --> O["Orchestrator (LLM)"]
+    W --> D["Data Agent (Python)"]
+    W --> M["Memory Manager"]
 
-    O --> SA[Strength Analyst]
-    O --> EA[Endurance Analyst]
-    O --> CA[Chart Agent]
+    O --> SA["Strength Analyst"]
+    O --> EA["Endurance Analyst"]
+    O --> CA["Chart Agent"]
 
-    D --> SA
-    D --> EA
-    D --> CA
-
-    SA --> R[Telegram Renderer]
+    SA --> R["Telegram Renderer"]
     EA --> R
     CA --> R
 
-    W <--> PG[(PostgreSQL)]
-    W <--> REDIS[(Redis session state)]
-
-    R --> TG[Telegram response]
+    W --> PG[("PostgreSQL")]
+    W --> REDIS[("Redis session state")]
+    R --> TG["Telegram response"]
 ```
+
+The app is deployed as a Python application on Vercel. The single entry point, `api/index.py`, routes requests to the application handlers in `app/web/`.
+
+
 
 The app is deployed as a Python application on Vercel. The single entry point, `api/index.py`, routes requests to the application handlers in `app/web/`.
 
