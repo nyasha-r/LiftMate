@@ -209,7 +209,7 @@ These labels reflect the checks performed so far and should be updated when more
 
 The bot lists the following commands:
 
-`/start` ﾂｷ `/help` ﾂｷ `/last` ﾂｷ `/week` ﾂｷ `/pr` ﾂｷ `/chart` ﾂｷ `/compare` ﾂｷ `/profile` ﾂｷ `/forget` ﾂｷ `/debug`
+/start /help /last /week /pr /chart /compare /profile /forget /debug`
 
 Some history and analysis commands depend on workout data being available and may provide basic responses when no data has been logged.
 
