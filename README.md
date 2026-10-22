@@ -33,13 +33,23 @@ These components should not all be considered production-verified until their li
 
 ## Architecture
 
-```text
-Telegram 笏笏 webhook 笏笏笏・                      笏懌楳笏 QStash queue 笏笏> /api/worker
-Strava 笏笏笏 webhook 笏笏笏笏・                      笏・                                              笏懌楳笏 Workout analysis
-                                              笏懌楳笏 PostgreSQL data
-                                              笏懌楳笏 Redis session state
-                                              笏披楳笏 Telegram response
-```
+Telegram webhook ----+
+                     |
+                     v
+               /api/index.py
+                     |
+                     v
+               QStash queue
+                     |
+                     v
+                /api/worker
+                     |
+          +----------+----------+
+          |          |          |
+          v          v          v
+      PostgreSQL    Redis    Telegram
+        data       session   response
+                    state
 
 The app is deployed as a Python application on Vercel. The single entry point, `api/index.py`, routes requests to the application handlers in `app/web/`.
 
