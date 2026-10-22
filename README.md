@@ -61,12 +61,6 @@ flowchart TD
 The app is deployed as a Python application on Vercel. The single entry point, `api/index.py`, routes requests to the application handlers in `app/web/`.
 
 
-
-The app is deployed as a Python application on Vercel. The single entry point, `api/index.py`, routes requests to the application handlers in `app/web/`.
-
-
-The app is deployed as a Python application on Vercel. The single entry point, `api/index.py`, routes requests to the application handlers in `app/web/`.
-
 ## Technology stack
 
 - **Language:** Python
