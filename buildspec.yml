@@ -5,20 +5,12 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR
-      - aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "$ECR_REGISTRY"
-      - IMAGE_TAG=$(echo "$CODEBUILD_RESOLVED_SOURCE_VERSION" | cut -c 1-7)
+      - aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 191447408389.dkr.ecr.ap-southeast-2.amazonaws.com
   build:
     commands:
-      - echo Building LiftMate Docker image
-      - docker build -t "$ECR_REPOSITORY_URI:$IMAGE_TAG" .
-      - docker tag "$ECR_REPOSITORY_URI:$IMAGE_TAG" "$ECR_REPOSITORY_URI:latest"
+      - docker build -t liftmate .
+      - docker tag liftmate:latest 191447408389.dkr.ecr.ap-southeast-2.amazonaws.com/liftmate:latest
   post_build:
     commands:
-      - echo Pushing LiftMate Docker image
-      - docker push "$ECR_REPOSITORY_URI:$IMAGE_TAG"
-      - docker push "$ECR_REPOSITORY_URI:latest"
-      - printf '{"imageUri":"%s"}' "$ECR_REPOSITORY_URI:$IMAGE_TAG" > imageDetail.json
+      - docker push 191447408389.dkr.ecr.ap-southeast-2.amazonaws.com/liftmate:latest
 
-artifacts:
-  files:
-    - imageDetail.json
